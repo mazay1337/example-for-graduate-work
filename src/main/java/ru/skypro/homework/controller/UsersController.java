@@ -1,7 +1,6 @@
 package ru.skypro.homework.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,8 +14,6 @@ import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 
-import java.net.Authenticator;
-
 
 /**
  * Контроллер для управления пользователями
@@ -29,9 +26,9 @@ import java.net.Authenticator;
 @RequestMapping("/users")
 @CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Пользователи", description = "Эндпойнты для работы с пользователями")
-public class UserController {
+public class UsersController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
 
     /**
