@@ -2,6 +2,9 @@ package ru.skypro.homework.dto;
 
 import java.util.Objects;
 
+/**
+ * Класс для регистрации пользователя
+ * */
 public class RegisterDto {
 
     private String username;

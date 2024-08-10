@@ -2,6 +2,9 @@ package ru.skypro.homework.dto;
 
 import java.util.Objects;
 
+/**
+ * Класс для создания или изменения комментария
+ * */
 public class CreateOrUpdateCommentDto {
 
     private String text;

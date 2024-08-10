@@ -2,6 +2,10 @@ package ru.skypro.homework.dto;
 
 import java.util.Objects;
 
+
+/**
+ * Класс, предоставляющий расширенную информацию об объявлении
+ * */
 public class ExtendedAdDto {
 
     private int pk;

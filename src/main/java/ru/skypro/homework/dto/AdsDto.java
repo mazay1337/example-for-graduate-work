@@ -4,6 +4,9 @@ package ru.skypro.homework.dto;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Класс, представляющий все объявления
+ * */
 public class AdsDto {
 
     private int count;
