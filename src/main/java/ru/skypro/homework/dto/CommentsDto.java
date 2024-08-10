@@ -1,16 +1,48 @@
 package ru.skypro.homework.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
 
 import java.util.List;
+import java.util.Objects;
 
-@Data
 public class CommentsDto {
 
-    @Schema(description = "общее количество комментариев")
     private int type;
-
-    @Schema
     private List<CommentDto> results;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public List<CommentDto> getResults() {
+        return results;
+    }
+
+    public void setResults(List<CommentDto> results) {
+        this.results = results;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CommentsDto that = (CommentsDto) o;
+        return type == that.type && Objects.equals(results, that.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, results);
+    }
+
+    @Override
+    public String toString() {
+        return "CommentsDto{" +
+                "type=" + type +
+                ", results=" + results +
+                '}';
+    }
 }
