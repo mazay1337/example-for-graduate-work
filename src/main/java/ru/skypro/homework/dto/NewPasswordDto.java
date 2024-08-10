@@ -2,6 +2,10 @@ package ru.skypro.homework.dto;
 
 import java.util.Objects;
 
+
+/**
+ * Класс для изменения пароля пользователя
+ * */
 public class NewPasswordDto {
 
     private String currentPassword;

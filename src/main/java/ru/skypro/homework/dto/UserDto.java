@@ -2,6 +2,10 @@ package ru.skypro.homework.dto;
 
 import java.util.Objects;
 
+
+/**
+ * Класс, представляющий пользователя и его данных
+ * */
 public class UserDto {
 
     private int id;

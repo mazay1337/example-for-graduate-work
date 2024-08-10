@@ -2,6 +2,9 @@ package ru.skypro.homework.dto;
 
 import java.util.Objects;
 
+/**
+ * Класс, представляющий логин пользователя
+ * */
 public class LoginDto {
 
     private String username;

@@ -3,6 +3,9 @@ package ru.skypro.homework.dto;
 
 import java.util.Objects;
 
+/**
+ * Класс для изменения данных пользователя
+ * */
 public class UpdateUserDto {
 
     private String firstName;
