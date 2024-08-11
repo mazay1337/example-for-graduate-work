@@ -1,11 +1,14 @@
 package ru.skypro.homework.dto;
 
+import lombok.Data;
+
 import java.util.Objects;
 
 
 /**
  * Класс для изменения пароля пользователя
  * */
+@Data
 public class NewPasswordDto {
 
     private String currentPassword;
