@@ -4,26 +4,27 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.*;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Контроллер для обработки операций с объявлениями
  */
+@Slf4j
 @RestController
 @RequestMapping("/ads")
 @CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Объявления", description = "Эндпойнты для работы с объявлениями")
-public class AdsController {
-
-    private final Logger logger = LoggerFactory.getLogger(AdsController.class);
+public class AdController {
 
 
     /**
@@ -35,7 +36,7 @@ public class AdsController {
     @Operation(summary = "Получение всех объявлений")
     @ApiResponse(responseCode = "200", description = "OK")
     public ResponseEntity<List<AdDto>> getAllAds() {
-        logger.info("Запрос на получение всех объявлений");
+        log.info("Запрос на получение всех объявлений");
         return ResponseEntity.ok(Collections.emptyList());
     }
 
@@ -43,18 +44,19 @@ public class AdsController {
     /**
      * Эндпойнт для обавления объявления.
      *
-     * @param createOrUpdateAdDto Данные для нового объявления.
-     * @return Созданное объявление.
+     * @param properties
+     * @param file
+     * @return Созданное объявление
      */
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Добавление объявления")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Create"),
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
     })
-    public ResponseEntity<AdDto> addAd(@RequestParam("image") byte[] image,
-                                       @RequestPart("properties") CreateOrUpdateAdDto createOrUpdateAdDto) {
-        logger.info("Запрос на добавление нового объявления");
+    public ResponseEntity<?> addAd(@RequestPart("properties") CreateOrUpdateAdDto properties,
+                                   @RequestPart(name = "image") MultipartFile file) {
+        log.info("Запрос на добавление нового объявления");
         return ResponseEntity.ok(new AdDto());
     }
 
@@ -73,7 +75,7 @@ public class AdsController {
             @ApiResponse(responseCode = "404", description = "Not found")
     })
     public ResponseEntity<List<CommentDto>> getComments(@PathVariable int id) {
-        logger.info("Запрос на получение комментариев для объявления с ID: {}", id);
+        log.info("Запрос на получение комментариев для объявления с ID: {}", id);
         return ResponseEntity.ok(Collections.emptyList());
     }
 
@@ -94,7 +96,7 @@ public class AdsController {
     })
     public ResponseEntity<CommentDto> addComment(@PathVariable int id,
                                                  @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
-        logger.info("Запрос на добавление комментария к объявлению с ID: {}", id);
+        log.info("Запрос на добавление комментария к объявлению с ID: {}", id);
         return ResponseEntity.ok(new CommentDto());
     }
 
@@ -113,7 +115,7 @@ public class AdsController {
             @ApiResponse(responseCode = "404", description = "Not found")
     })
     public ResponseEntity<ExtendedAdDto> getAd(@PathVariable int id) {
-        logger.info("Запрос на получение информации об объявлении с ID: {}", id);
+        log.info("Запрос на получение информации об объявлении с ID: {}", id);
         return ResponseEntity.ok(new ExtendedAdDto());
     }
 
@@ -133,7 +135,7 @@ public class AdsController {
             @ApiResponse(responseCode = "404", description = "Not found")
     })
     public ResponseEntity<Void> removeAd(@PathVariable int id) {
-        logger.info("Запрос на удаление объявления с ID: {}", id);
+        log.info("Запрос на удаление объявления с ID: {}", id);
         return ResponseEntity.noContent().build();
     }
 
@@ -155,7 +157,7 @@ public class AdsController {
     })
     public ResponseEntity<AdDto> updateAd(@PathVariable int id,
                                           @RequestBody CreateOrUpdateAdDto createOrUpdateAdDto) {
-        logger.info("Запрос на обновление объявления с ID: {}", id);
+        log.info("Запрос на обновление объявления с ID: {}", id);
         return ResponseEntity.ok(new AdDto());
     }
 
@@ -177,7 +179,7 @@ public class AdsController {
     })
     public ResponseEntity<Void> deleteComment(@PathVariable int adId,
                                               @PathVariable int commentId) {
-        logger.info("Запрос на удаление комментария с ID: {} для объявления с ID: {}", commentId, adId);
+        log.info("Запрос на удаление комментария с ID: {} для объявления с ID: {}", commentId, adId);
         return ResponseEntity.ok().build();
     }
 
@@ -201,7 +203,7 @@ public class AdsController {
     public ResponseEntity<CommentDto> updateComment(@PathVariable int adId,
                                                     @PathVariable int commentId,
                                                     @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
-        logger.info("Запрос на обновление комментария с ID: {} для объявления с ID: {}", commentId, adId);
+        log.info("Запрос на обновление комментария с ID: {} для объявления с ID: {}", commentId, adId);
         return ResponseEntity.ok(new CommentDto());
     }
 
@@ -218,7 +220,7 @@ public class AdsController {
             @ApiResponse(responseCode = "401", description = "Unauthorized")
     })
     public ResponseEntity<List<AdsDto>> getAdsMe() {
-        logger.info("Запрос на получение объявлений авторизованного пользователя");
+        log.info("Запрос на получение объявлений авторизованного пользователя");
         return ResponseEntity.ok(Collections.emptyList());
     }
 
@@ -238,9 +240,10 @@ public class AdsController {
             @ApiResponse(responseCode = "403", description = "Forbidden"),
             @ApiResponse(responseCode = "404", description = "Not found")
     })
-    public ResponseEntity<Void> updateImage(@PathVariable int id,
-                                            @RequestPart("image") byte[] image) {
-        logger.info("Запрос на обновление изображения для объявления с ID: {}", id);
+    public ResponseEntity<Void> updateImage(@PathVariable Long id,
+                                            @RequestPart MultipartFile image) {
+        log.info("Запрос на обновление изображения для объявления с ID: {}", id);
         return ResponseEntity.ok().build();
     }
+
 }
