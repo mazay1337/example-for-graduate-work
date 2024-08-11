@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Data
-@Table(name = "image")
+@Table(name = "images")
 public class Image {
 
     @Id
