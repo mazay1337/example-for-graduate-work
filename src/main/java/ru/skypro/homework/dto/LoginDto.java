@@ -2,8 +2,6 @@ package ru.skypro.homework.dto;
 
 import lombok.Data;
 
-import java.util.Objects;
-
 /**
  * Класс, представляющий логин пользователя
  * */
