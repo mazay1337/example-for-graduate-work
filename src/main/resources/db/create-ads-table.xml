@@ -22,7 +22,7 @@
 
         <addForeignKeyConstraint baseTableName="ads" baseColumnNames="author_id"
                                  constraintName="FK_AUTHOR_ID"
-                                 referencedTableName="images"
+                                 referencedTableName="users"
                                  referencedColumnNames="id"/>
 
         <addForeignKeyConstraint baseTableName="ads" baseColumnNames="image_id"

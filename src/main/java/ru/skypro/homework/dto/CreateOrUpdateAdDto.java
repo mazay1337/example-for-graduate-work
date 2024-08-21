@@ -3,7 +3,6 @@ package ru.skypro.homework.dto;
 
 import lombok.Data;
 
-import java.util.Objects;
 
 /**
  * Класс для создания или изменения объявления

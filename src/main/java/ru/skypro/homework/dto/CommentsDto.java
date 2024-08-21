@@ -4,7 +4,6 @@ package ru.skypro.homework.dto;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Класс, предсталяющий общее колличество комментариев
